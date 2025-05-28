@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mastodon Style Signup</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      margin: 0;
+      padding: 0;
+      color: #1c1e21;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+
+    .logo span {
+      color: #4a00e0;
+      margin-left: 8px;
+    }
+
+    .progress {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+    }
+
+    .step {
+      text-align: center;
+      flex: 1;
+    }
+
+    .circle {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid #bbb;
+      margin: 0 auto 8px;
+      line-height: 28px;
+      font-weight: bold;
+      color: #4a00e0;
+    }
+
+    .active .circle {
+      border-color: #4a00e0;
+      background-color: #4a00e0;
+      color: #fff;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #444;
+    }
+
+    .rules {
+      margin-bottom: 20px;
+    }
+
+    .rule {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .rule-num {
+      background-color: #4a00e0;
+      color: #fff;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      text-align: center;
+      line-height: 28px;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #4a00e0;
+      color: #fff;
+      border: none;
+      margin-top: 20px;
+      cursor: pointer;
+    }
+
+    .back-btn {
+      background: #aaa;
+      margin-top: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .success {
+      text-align: center;
+      font-size: 20px;
+      color: green;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="logo">
+    <img src="logo-stackly (1).png" alt="logo" height="40">
+    
+  </div>
+
+  <div class="progress">
+    <div class="step active" id="stepIndicator1">
+      <div class="circle">1</div>
+      <div>Accept rules</div>
+    </div>
+    <div class="step" id="stepIndicator2">
+      <div class="circle">2</div>
+      <div>Your details</div>
+    </div>
+    <div class="step" id="stepIndicator3">
+      <div class="circle">3</div>
+      <div>Confirm account</div>
+    </div>
+  </div>
+
+  <!-- Step 1 -->
+  <div id="step1">
+    <h2>Some ground rules.</h2>
+    <p>These are set and enforced by the mastodon.social moderators.</p>
+    <div class="rules">
+      <div class="rule"><div class="rule-num">1</div><div><strong>Sexually explicit or violent media</strong> must be marked as sensitive or with a content warning.</div></div>
+      <div class="rule"><div class="rule-num">2</div><div><strong>No racism, sexism, homophobia,</strong> transphobia, ableism, xenophobia, or casteism.</div></div>
+      <div class="rule"><div class="rule-num">3</div><div><strong>No incitement of violence</strong> or promotion of violent ideologies.</div></div>
+      <div class="rule"><div class="rule-num">4</div><div><strong>No harassment, block evasion,</strong> dogpiling, or doxxing of others.</div></div>
+    </div>
+    <input type="checkbox" id="acceptCheck"> I accept the rules<br>
+    <button onclick="goToStep2()">Continue</button>
+    <a href="index.html"><button class="back-btn">Back</button></a>
+  </div>
+
+  <!-- Step 2 -->
+  <div id="step2" class="hidden">
+    <h2>Your details</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <input type="password" id="confirmPassword" placeholder="Confirm Password">
+    <input type="date" id="dob">
+    <input type="checkbox" id="terms"> I agree to the terms and conditions<br>
+    <button onclick="goToStep3()">Sign Up</button>
+    <button class="back-btn" onclick="backToStep1()">Back</button>
+  </div>
+
+  <!-- Step 3 -->
+  <div id="step3" class="hidden">
+    <h2>Confirm account</h2>
+    <input type="text" id="loginUsername" placeholder="Username">
+    <input type="password" id="loginPassword" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <button class="back-btn" onclick="backToStep2()">Back</button>
+  </div>
+
+  <!-- Success -->
+  <div id="successMessage" class="hidden success">
+    ✅ You have successfully logged in!
+  </div>
+
+</div>
+
+<script>
+  let userData = {};
+
+  function updateStepIndicator(step) {
+    for (let i = 1; i <= 3; i++) {
+      document.getElementById("stepIndicator" + i).classList.remove("active");
+    }
+    document.getElementById("stepIndicator" + step).classList.add("active");
+  }
+
+  function goToStep2() {
+    if (!document.getElementById('acceptCheck').checked) {
+      alert("Please accept the rules.");
+      return;
+    }
+    document.getElementById('step1').classList.add('hidden');
+    document.getElementById('step2').classList.remove('hidden');
+    updateStepIndicator(2);
+  }
+
+  function backToStep1() {
+    document.getElementById('step2').classList.add('hidden');
+    document.getElementById('step1').classList.remove('hidden');
+    updateStepIndicator(1);
+  }
+
+  function backToStep2() {
+    document.getElementById('step3').classList.add('hidden');
+    document.getElementById('step2').classList.remove('hidden');
+    updateStepIndicator(2);
+  }
+
+  function goToStep3() {
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const confirm = document.getElementById('confirmPassword').value;
+    const dob = document.getElementById('dob').value;
+    const terms = document.getElementById('terms').checked;
+
+    const usernamePattern = /^[a-zA-Z0-9]+$/;
+    const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d]).{6,}$/;
+
+    if (!username || !email || !password || !confirm || !dob || !terms) {
+      alert("All fields are required.");
+      return;
+    }
+    if (!usernamePattern.test(username)) {
+      alert("Username must contain only letters and numbers.");
+      return;
+    }
+    if (!passwordPattern.test(password)) {
+      alert("Password must contain at least 1 letter, 1 number, and 1 special character.");
+      return;
+    }
+    if (password !== confirm) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    userData = { username, password };
+
+    document.getElementById('step2').classList.add('hidden');
+    document.getElementById('step3').classList.remove('hidden');
+    updateStepIndicator(3);
+  }
+
+  function login() {
+    const uname = document.getElementById('loginUsername').value.trim();
+    const pass = document.getElementById('loginPassword').value;
+
+    if (uname === userData.username && pass === userData.password) {
+      document.getElementById('step3').classList.add('hidden');
+      document.getElementById('successMessage').classList.remove('hidden');
+    } else {
+      alert("Incorrect username or password.");
+    }
+  }
+</script>
+
+</body>
+</html>
