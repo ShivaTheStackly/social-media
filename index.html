@@ -13,37 +13,111 @@
       padding: 0;
       font-family: system-ui, sans-serif;
     }
-    body {
-      background: #f5f6f8;
+   body {
       display: flex;
-      padding: 1rem;
-      gap: 1rem;
-      color: #333;
-      
+      flex-direction: row;
+      overflow: hidden; /* Prevent body from scrolling */
     }
-    aside, main, .auth-section {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 1rem;
-    }
-    aside {
+
+    aside, .auth-section {
       width: 250px;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      height: fit-content;
+      padding: 1rem;
+      background-color: #f5f5f5;
+      overflow-y: auto;
+      height: 100vh;
+      flex-shrink: 0;
     }
+
     main {
-      flex: 1;
+      flex-grow: 1;
+      overflow-y: auto;
+      height: 100vh;
+      padding: 1rem;
+      background: #fff;
     }
-    .auth-section {
-      width: 250px;
-      height: fit-content;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+aside {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Full viewport height */
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+
+  /* Make the middle content scrollable if it grows */
+  aside > div:not(.stats):not(.footer) {
+    overflow-y: auto;
+  }
+
+  .stats {
+    margin-top: auto; /* Push stats to the bottom */
+    /* optionally add some spacing */
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+  }
+
+  /* Keep footer just after stats or below */
+  .footer {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #666;
+  }
+    .search-box input {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
     }
+
+    ul {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    ul li {
+      margin-bottom: 1rem;
+      cursor: pointer;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      margin-top: 1rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #6364ff;
+      color: white;
+    }
+
+    .footer {
+      font-size: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .footer p {
+      margin: 0.5rem 0;
+    }
+
+    .welcome-img img {
+      width: 100%;
+      height: auto;
+      margin: 1rem 0;
+    }
+    aside > div:not(.stats):not(.footer) {
+    overflow-y: auto;
+  }
+
+  .stats {
+    margin-top: auto; /* Push stats to the bottom */
+    /* optionally add some spacing */
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+  }
+
+  /* Keep footer just after stats or below */
+  .footer {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #666;
+  }
     .search-box input {
       width: 100%;
       padding: 0.5rem;
@@ -261,19 +335,156 @@
       background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Graph_up.svg/100px-Graph_up.svg.png') no-repeat center;
       background-size: contain;
     }
+
+    .star-btn.starred i {
+    color: gold;
+  }
+  .engagement span {
+    cursor: pointer;
+    margin-right: 15px;
+    user-select: none;
+  }
+  .comment-area,
+  .forward-area {
+    margin-top: 10px;
+  }
+  .hidden {
+    display: none;
+  }
+  .comment-input,
+  .forward-input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+  .comments-list > div {
+    font-size: 14px;
+    color: #333;
+  }
+
+  #newsTab .news-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #newsTab .news-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 15px;
+  }
+
+  #newsTab .news-content {
+    flex: 1;
+  }
+
+  #newsTab .news-headline {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  #newsTab .news-meta {
+    font-size: 13px;
+    color: #777;
+  }
+
+  .hidden { display: none; }
+  .active { display: block; }
+
+  /* General tab-content styling */
+.tab-content {
+  display: none;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* About image styling */
+#aboutTab img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* About tab container styling */
+#aboutTab {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
+  color: #333;
+}
+
+/* Text block styling */
+#aboutTab div {
+  max-width: 800px;
+  margin: 2rem auto;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Section headings */
+#aboutTab h3, #aboutTab h4 {
+  color: #222;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Anchor/link styling */
+#aboutTab a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+#aboutTab a:hover {
+  text-decoration: underline;
+}
+
+/* Simple fade animation for tabs */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+/* Back button styling */
+.back-button {
+  display: inline-block;
+  padding: 10px 20px;
+  
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+
+
   </style>
 </head>
 <body>
   <aside>
-    <div class="search-box">
-      <input type="text" placeholder="Search" />
-    </div>
+    
     <div>
       <strong>Stackly.social</strong> is one of the many independent Mastodon servers you can use to participate in the fediverse.
     </div>
-    <div class="welcome-img">
-      <img src="https://files.mastodon.social/site_uploads/files/000/000/001/@2x/57c12f441d083cde.png" alt="Welcome Illustration" />
-    </div>
+   <div class="welcome-img">
+  <a href="javascript:void(0);" onclick="showTab('aboutTab')">
+    <img src="https://files.mastodon.social/site_uploads/files/000/000/001/@2x/57c12f441d083cde.png" alt="Welcome Illustration" />
+  </a>
+</div>
+
+
     <div class="stats">
       <div><strong>ADMINISTERED BY:</strong> Stackly @Stackly</div>
       <div><strong>SERVER STATS:</strong> 296K active users</div>
@@ -297,86 +508,137 @@
     </div>
 
     <div class="feed" id="postsTab">
-      <div class="post">
-        <div class="post-header">
-          <img src="https://files.mastodon.social/cache/accounts/avatars/000/263/621/original/27265ab7c4021822.jpg" />
-          <div class="post-user">
-            <span class="name">Scott Hanselman</span>
-            <span class="handle">@shanselman@hachyderm.io</span>
-          </div>
-          <div class="timestamp">2h</div>
-        </div>
-        <div class="post-body">
-          Elon Musk, Jeff Bezos, and Mark Zuckerberg together possess a combined net worth of approximately $955 billion. This figure surpasses the total wealth held by the bottom half of American society.
-        </div>
-        <div class="engagement">
-          <span><i class="fas fa-retweet"></i> 11</span>
-<span><i class="fas fa-star"></i> 134</span>
-<span><i class="fas fa-comment"></i> 109</span>
-        </div>
+  <div class="post">
+    <div class="post-header">
+      <img src="https://files.mastodon.social/cache/accounts/avatars/000/263/621/original/27265ab7c4021822.jpg" />
+      <div class="post-user">
+        <span class="name">Scott Hanselman</span>
+        <span class="handle">@shanselman@hachyderm.io</span>
       </div>
-
-      <div class="post">
-        <div class="post-header">
-          <img src="https://files.mastodon.social/accounts/avatars/000/039/207/original/972a88b4292b90af.jpg" />
-          <div class="post-user">
-            <span class="name">Stefan</span>
-            <span class="handle">@StefanThinks@beige.party</span>
-          </div>
-          <div class="timestamp">4h</div>
-        </div>
-        <div class="post-body">
-          People defending AI-generated "art" because AI is also used to find medical cures is like saying that smashing people’s toes with hammers should be acceptable because hammers are used to build hospitals.
-        </div>
-        <div class="engagement">
-            <span><i class="fas fa-retweet"></i> 10</span>
-<span><i class="fas fa-star"></i> 194</span>
-<span><i class="fas fa-comment"></i> 160</span>
-          
-        </div>
-      </div>
-
-      <div class="post">
-        <div class="post-header">
-          <img src="https://files.mastodon.social/cache/accounts/avatars/109/341/656/129/132/770/original/25eb6ead31367f32.png" />
-          <div class="post-user">
-            <span class="name">Natasha Jay (she/her)</span>
-            <span class="handle">@Natasha_Jay@tech.lgbt</span>
-          </div>
-          <div class="timestamp">1h</div>
-        </div>
-        <div class="post-body">
-          UK sculptor Anna & the Willow creates nature-inspired sculptures made from rods of willow. 'Huntress of Skipton' in Castle Woods.
-         
-        </div>
-        <div class="engagement">
-         <span><i class="fas fa-retweet"></i> 15</span>
-<span><i class="fas fa-star"></i> 154</span>
-<span><i class="fas fa-comment"></i> 119</span>
-        </div>
-      </div>
-
-       <div class="post">
-        <div class="post-header">
-          <img src="https://files.mastodon.social/accounts/avatars/000/039/207/original/972a88b4292b90af.jpg" />
-          <div class="post-user">
-            <span class="name">Stefan</span>
-            <span class="handle">@StefanThinks@beige.party</span>
-          </div>
-          <div class="timestamp">4h</div>
-        </div>
-        <div class="post-body">
-          People defending AI-generated "art" because AI is also used to find medical cures is like saying that smashing people’s toes with hammers should be acceptable because hammers are used to build hospitals.
-        </div>
-        <div class="engagement">
-            <span><i class="fas fa-retweet"></i> 10</span>
-<span><i class="fas fa-star"></i> 194</span>
-<span><i class="fas fa-comment"></i> 160</span>
-          
-        </div>
-      </div>
-
+      <div class="timestamp">2h</div>
     </div>
+    <div class="post-body">
+      Elon Musk, Jeff Bezos, and Mark Zuckerberg together possess a combined
+      net worth of approximately $955 billion. This figure surpasses the total
+      wealth held by the bottom half of American society.
+    </div>
+    <div class="engagement">
+      <span class="forward-btn" data-count="11">
+        <i class="fas fa-share"></i> <span class="count">11</span>
+      </span>
+      <span class="star-btn" data-count="134">
+        <i class="fas fa-star"></i> <span class="count">134</span>
+      </span>
+      <span class="comment-btn" data-count="109">
+        <i class="fas fa-comment"></i> <span class="count">109</span>
+      </span>
+    </div>
+    <div class="forward-area hidden">
+      <input
+        type="text"
+        class="forward-input"
+        placeholder="Enter recipient ID or name and press Enter"
+      />
+      <div class="forward-confirmation" style="color: green; margin-top: 5px;"></div>
+    </div>
+    <div class="comment-area hidden">
+      <input
+        type="text"
+        class="comment-input"
+        placeholder="Write a comment and press Enter"
+      />
+      <div class="comments-list"></div>
+    </div>
+  </div>
+
+  <!-- Repeat other posts similarly -->
+  <div class="post">
+    <div class="post-header">
+      <img src="https://files.mastodon.social/accounts/avatars/000/039/207/original/972a88b4292b90af.jpg" />
+      <div class="post-user">
+        <span class="name">Stefan</span>
+        <span class="handle">@StefanThinks@beige.party</span>
+      </div>
+      <div class="timestamp">4h</div>
+    </div>
+    <div class="post-body">
+      People defending AI-generated "art" because AI is also used to find
+      medical cures is like saying that smashing people’s toes with hammers
+      should be acceptable because hammers are used to build hospitals.
+    </div>
+    <div class="engagement">
+      <span class="forward-btn" data-count="10">
+        <i class="fas fa-share"></i> <span class="count">10</span>
+      </span>
+      <span class="star-btn" data-count="194">
+        <i class="fas fa-star"></i> <span class="count">194</span>
+      </span>
+      <span class="comment-btn" data-count="160">
+        <i class="fas fa-comment"></i> <span class="count">160</span>
+      </span>
+    </div>
+    <div class="forward-area hidden">
+      <input
+        type="text"
+        class="forward-input"
+        placeholder="Enter recipient ID or name and press Enter"
+      />
+      <div class="forward-confirmation" style="color: green; margin-top: 5px;"></div>
+    </div>
+    <div class="comment-area hidden">
+      <input
+        type="text"
+        class="comment-input"
+        placeholder="Write a comment and press Enter"
+      />
+      <div class="comments-list"></div>
+    </div>
+  </div>
+
+  <div class="post">
+    <div class="post-header">
+      <img src="https://files.mastodon.social/cache/accounts/avatars/109/341/656/129/132/770/original/25eb6ead31367f32.png" />
+      <div class="post-user">
+        <span class="name">Natasha Jay (she/her)</span>
+        <span class="handle">@Natasha_Jay@tech.lgbt</span>
+      </div>
+      <div class="timestamp">1h</div>
+    </div>
+    <div class="post-body">
+      UK sculptor Anna & the Willow creates nature-inspired sculptures made
+      from rods of willow. 'Huntress of Skipton' in Castle Woods.
+    </div>
+    <div class="engagement">
+      <span class="forward-btn" data-count="15">
+        <i class="fas fa-share"></i> <span class="count">15</span>
+      </span>
+      <span class="star-btn" data-count="154">
+        <i class="fas fa-star"></i> <span class="count">154</span>
+      </span>
+      <span class="comment-btn" data-count="119">
+        <i class="fas fa-comment"></i> <span class="count">119</span>
+      </span>
+    </div>
+    <div class="forward-area hidden">
+      <input
+        type="text"
+        class="forward-input"
+        placeholder="Enter recipient ID or name and press Enter"
+      />
+      <div class="forward-confirmation" style="color: green; margin-top: 5px;"></div>
+    </div>
+    <div class="comment-area hidden">
+      <input
+        type="text"
+        class="comment-input"
+        placeholder="Write a comment and press Enter"
+      />
+      <div class="comments-list"></div>
+    </div>
+  </div>
+</div>
+
+
 
     <div class="feed hidden" id="hashtagsTab">
       <div class="trending-section">
@@ -453,9 +715,108 @@
 </div>
     </div>
 
-    <div class="feed hidden" id="newsTab">
-      <p>Mastodon v4.4.0-nightly released with performance and moderation upgrades.</p>
+   <div class="feed hidden" id="newsTab">
+  <!-- News Items -->
+  <div class="news-item">
+    <img src="https://via.placeholder.com/100x100" class="news-img" />
+    <div class="news-content">
+      <div class="news-headline">Mastodon v4.4.0-nightly released with performance and moderation upgrades</div>
+      <div class="news-meta">
+        <span class="news-place">Berlin, Germany</span> • <span class="news-time" data-time="2025-05-29T12:00:00Z"></span>
+      </div>
     </div>
+  </div>
+
+  <div class="news-item">
+    <img src="https://via.placeholder.com/100x100" class="news-img" />
+    <div class="news-content">
+      <div class="news-headline">AI beats top doctors in rare disease diagnosis study</div>
+      <div class="news-meta">
+        <span class="news-place">Boston, USA</span> • <span class="news-time" data-time="2025-05-29T10:00:00Z"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="news-item">
+    <img src="https://via.placeholder.com/100x100" class="news-img" />
+    <div class="news-content">
+      <div class="news-headline">Tesla unveils new solar-powered charging station concept</div>
+      <div class="news-meta">
+        <span class="news-place">Austin, USA</span> • <span class="news-time" data-time="2025-05-28T18:00:00Z"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="news-item">
+    <img src="https://via.placeholder.com/100x100" class="news-img" />
+    <div class="news-content">
+      <div class="news-headline">Meta launches open-source AI model for developers</div>
+      <div class="news-meta">
+        <span class="news-place">Menlo Park, USA</span> • <span class="news-time" data-time="2025-05-28T08:30:00Z"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="news-item">
+    <img src="https://via.placeholder.com/100x100" class="news-img" />
+    <div class="news-content">
+      <div class="news-headline">New York bans facial recognition use in schools</div>
+      <div class="news-meta">
+        <span class="news-place">New York, USA</span> • <span class="news-time" data-time="2025-05-27T14:00:00Z"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="news-item">
+    <img src="https://via.placeholder.com/100x100" class="news-img" />
+    <div class="news-content">
+      <div class="news-headline">NASA confirms water vapor on Jupiter's Europa</div>
+      <div class="news-meta">
+        <span class="news-place">Houston, USA</span> • <span class="news-time" data-time="2025-05-27T08:00:00Z"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="news-item">
+    <img src="https://via.placeholder.com/100x100" class="news-img" />
+    <div class="news-content">
+      <div class="news-headline">Google integrates Gemini into Android 15 settings</div>
+      <div class="news-meta">
+        <span class="news-place">Mountain View, USA</span> • <span class="news-time" data-time="2025-05-26T16:00:00Z"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="news-item">
+    <img src="https://via.placeholder.com/100x100" class="news-img" />
+    <div class="news-content">
+      <div class="news-headline">OpenAI Sora generates high-resolution video clips from text</div>
+      <div class="news-meta">
+        <span class="news-place">San Francisco, USA</span> • <span class="news-time" data-time="2025-05-26T11:00:00Z"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="news-item">
+    <img src="https://via.placeholder.com/100x100" class="news-img" />
+    <div class="news-content">
+      <div class="news-headline">Sony announces AI-powered music mastering service</div>
+      <div class="news-meta">
+        <span class="news-place">Tokyo, Japan</span> • <span class="news-time" data-time="2025-05-25T09:00:00Z"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="news-item">
+    <img src="https://via.placeholder.com/100x100" class="news-img" />
+    <div class="news-content">
+      <div class="news-headline">India tests new quantum communication satellite</div>
+      <div class="news-meta">
+        <span class="news-place">Bangalore, India</span> • <span class="news-time" data-time="2025-05-24T15:00:00Z"></span>
+      </div>
+    </div>
+  </div>
+</div>
   </div>
     </div>
 
@@ -505,6 +866,64 @@
         </div>
       </div>
     </div>
+
+    <div id="aboutTab" class="tab-content hidden">
+  <h3><i class="fas fa-info-circle"></i> About Us</h3>
+  <div style="text-align: center;">
+    <img 
+      src="https://files.mastodon.social/site_uploads/files/000/000/001/@2x/57c12f441d083cde.png" 
+      alt="Welcome Illustration" 
+      style="max-width: 100%; height: auto; margin: 0 auto; display: block;" 
+    />
+  </div>
+
+  <div style="max-width: 800px; margin: 2rem auto; padding: 1rem; font-size: 1rem; line-height: 1.6;">
+    <p><strong>mastodon.social</strong><br>Decentralized social media powered by Mastodon</p>
+
+    <p><strong>Administered by:</strong><br>Mastodon<br>@Mastodon</p>
+
+    <p><strong>Contact:</strong><br>staff@mastodon.social</p>
+
+    <h4>About</h4>
+    <p>Please mind that the staff@mastodon.social e-mail is for inquiries related to the operation of the mastodon.social server specifically. If your account is on another server, we will not be able to assist you. For inquiries not related specifically to the operation of this server, such as press inquiries about Mastodon gGmbH, please contact press@joinmastodon.org.</p>
+
+    <p><strong>Additional addresses:</strong><br>
+    Legal, GDPR, DMCA: <a href="mailto:legal@mastodon.social">legal@mastodon.social</a><br>
+    Appeals: <a href="mailto:moderation@mastodon.social">moderation@mastodon.social</a></p>
+
+    <h4>Funding</h4>
+    <p>This server is crowdfunded by Patreon donations. For a list of sponsors, see <a href="https://joinmastodon.org" target="_blank">joinmastodon.org</a>.</p>
+
+    <h4>Reporting and moderation</h4>
+    <p>When reporting accounts, please make sure to include at least a few posts that show rule-breaking behaviour, when applicable. If there is any additional context that might help make a decision, please also include it in the comment. This is especially important when the content is in a language nobody on the moderation team speaks.</p>
+
+    <p>We usually handle reports within 24 hours. Please mind that you are not notified when a report you have made has led to a punitive action, and that not all punitive actions are externally visible. For first-time offenses, we may opt to delete offending content, escalating to harsher measures on repeat offenses.</p>
+
+    <p>We have a team of paid moderators. If you would like to become a moderator, get in touch with us through the e-mail address above.</p>
+
+    <h4>Impressum</h4>
+    <p>
+      Mastodon gGmbH<br>
+      Mühlenstraße 8a<br>
+      14167 Berlin<br>
+      Germany<br><br>
+      E-Mail-Adresse: <a href="mailto:hello@joinmastodon.org">hello@joinmastodon.org</a><br>
+      Vertretungsberechtigt: Eugen Rochko (Geschäftsführer)<br>
+      Umsatzsteuer Identifikationsnummer (USt-ID): DE344258260
+    </p>
+
+    <h4>Handelsregister</h4>
+    <p>
+      Geführt bei: Amtsgericht Charlottenburg<br>
+      Nummer: HRB 230086 B
+    </p>
+    <div style="text-align: center; margin-top: 2rem;">
+  <a href="index.html" class="back-button">← Back to Home</a>
+</div>
+  </div>
+</div>
+
+
   </main>
 
   <div class="auth-section">
@@ -516,8 +935,10 @@
     </ul>
     <p><strong>Stackly is the best way to keep up with what’s happening.</strong></p>
     <p>Follow anyone across the fediverse and see it all in chronological order. No algorithms, ads, or clickbait in sight.</p>
-    <button>Create account</button>
-    <button style="background:#eee;color:#333;margin-top:0.5rem;">Login</button>
+    <a href="Login.html">
+  <button>Create account</button>
+</a>
+    <a href="sign.html"><button style="background:#eee;color:#333;margin-top:0.5rem;">Login</button></a>
   </div>
 
   <script>
@@ -555,7 +976,152 @@
     // Activate the selected tab
     event.target.classList.add('active');
   }
+document.querySelectorAll(".forward-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const post = btn.closest(".post");
+      const forwardArea = post.querySelector(".forward-area");
+      const confirmation = forwardArea.querySelector(".forward-confirmation");
+      forwardArea.classList.toggle("hidden");
+      confirmation.textContent = "";
+      forwardArea.querySelector(".forward-input").value = "";
+      forwardArea.querySelector(".forward-input").focus();
+    });
+  });
 
+  // Forward input enter key - submit forward
+  document.querySelectorAll(".forward-input").forEach((input) => {
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const recipient = input.value.trim();
+        const forwardArea = input.closest(".forward-area");
+        const confirmation = forwardArea.querySelector(".forward-confirmation");
+        if (!recipient) {
+          confirmation.style.color = "red";
+          confirmation.textContent = "Please enter a recipient ID or name.";
+          return;
+        }
+        // Increment forward count
+        const post = input.closest(".post");
+        const forwardBtn = post.querySelector(".forward-btn");
+        let count = parseInt(forwardBtn.getAttribute("data-count"));
+        count++;
+        forwardBtn.setAttribute("data-count", count);
+        forwardBtn.querySelector(".count").textContent = count;
+
+        // Show confirmation
+        confirmation.style.color = "green";
+        confirmation.textContent = `Forwarded to "${recipient}" successfully!`;
+
+        // Clear input and hide after 2 seconds
+        input.value = "";
+        setTimeout(() => {
+          forwardArea.classList.add("hidden");
+          confirmation.textContent = "";
+        }, 2000);
+      }
+    });
+  });
+
+  // Star button click - toggle star and count
+  document.querySelectorAll(".star-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      let countSpan = btn.querySelector(".count");
+      let count = parseInt(btn.getAttribute("data-count"));
+      if (btn.classList.contains("starred")) {
+        count--;
+        btn.classList.remove("starred");
+        btn.querySelector("i").classList.remove("fas");
+        btn.querySelector("i").classList.add("far");
+      } else {
+        count++;
+        btn.classList.add("starred");
+        btn.querySelector("i").classList.remove("far");
+        btn.querySelector("i").classList.add("fas");
+      }
+      btn.setAttribute("data-count", count);
+      countSpan.textContent = count;
+    });
+  });
+
+  // Comment button click - toggle comment input visibility
+  document.querySelectorAll(".comment-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      let post = btn.closest(".post");
+      let commentArea = post.querySelector(".comment-area");
+      commentArea.classList.toggle("hidden");
+      commentArea.querySelector(".comment-input").focus();
+    });
+  });
+
+  // Comment input enter - add comment and increment count
+  document.querySelectorAll(".comment-input").forEach((input) => {
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        const commentText = input.value.trim();
+        if (!commentText) return;
+        const post = input.closest(".post");
+        const commentsList = post.querySelector(".comments-list");
+
+        const commentEl = document.createElement("div");
+        commentEl.textContent = commentText;
+        commentEl.style.borderTop = "1px solid #ddd";
+        commentEl.style.padding = "6px 0";
+
+        commentsList.appendChild(commentEl);
+        input.value = "";
+
+        const commentBtn = post.querySelector(".comment-btn");
+        let count = parseInt(commentBtn.getAttribute("data-count"));
+        count++;
+        commentBtn.setAttribute("data-count", count);
+        commentBtn.querySelector(".count").textContent = count;
+      }
+    });
+  });
+
+  function timeAgo(dateStr) {
+    const date = new Date(dateStr);
+    const seconds = Math.floor((new Date() - date) / 1000);
+    const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
+
+    const intervals = [
+      { seconds: 60, divisor: 1, unit: "second" },
+      { seconds: 3600, divisor: 60, unit: "minute" },
+      { seconds: 86400, divisor: 3600, unit: "hour" },
+      { seconds: 604800, divisor: 86400, unit: "day" },
+      { seconds: 2592000, divisor: 604800, unit: "week" },
+      { seconds: 31536000, divisor: 2592000, unit: "month" },
+      { seconds: Infinity, divisor: 31536000, unit: "year" }
+    ];
+
+    for (const interval of intervals) {
+      if (seconds < interval.seconds) {
+        const value = -Math.floor(seconds / interval.divisor);
+        return rtf.format(value, interval.unit);
+      }
+    }
+  }
+
+  document.querySelectorAll("#newsTab .news-time").forEach((el) => {
+    const time = el.getAttribute("data-time");
+    if (time) el.textContent = timeAgo(time);
+  });
+
+   function showTab(tabId) {
+    const tabs = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => {
+      tab.classList.add('hidden');
+      tab.classList.remove('active');
+    });
+
+    const selectedTab = document.getElementById(tabId);
+    if (selectedTab) {
+      selectedTab.classList.remove('hidden');
+      selectedTab.classList.add('active');
+    }
+  }
   </script>
 </body>
 </html>
